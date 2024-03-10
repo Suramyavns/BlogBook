@@ -1,0 +1,84 @@
+{% load widget_tweaks %}
+{% load static %}
+<head>
+    <title>Update Profile</title>
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'updateProfile.css' %}">
+</head>
+
+<div class="form-container" id="userUpdateForm">
+  <h2>Edit Profile
+  </h2>
+  <div style="display: flex; width: 100%; z-index: 1; justify-content: end; align-items: center; position: relative; top: -36px;">
+    <a href="{% url 'home' %}" style="color: white;">
+        <i class="fa-solid fa-house fa-xl"></i>
+      </a>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Name:</label>
+        {{form.name}}
+    </div>
+    <div class="form-group">
+        <label for="bio">Bio:</label>
+      {{form.bio}}
+    </div>
+    <div class="form-group">
+        <label for="occupation">Occupation:</label>
+      {{form.occupation}}
+    </div>
+    <div class="form-group" id="birthday">
+        <label for="avatar">Avatar:</label>
+        {{form.avatar}}
+    </div>
+    <div class="form-group">
+        <label for="birthday">Birthday:</label>
+        <div id="birthdayInput" style="display: grid; align-items: center; grid-template-columns: repeat(3,1fr);gap: 5px;">
+            {{form.birthday}}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+      {{form.city}}
+    </div>
+    <div class="form-group">
+        <label for="country">Country</label>
+      {{form.country}}
+    </div>
+    <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset" style="background-color: rgb(0, 0, 71);">
+    </div>
+  </form>
+    <button onclick="confirmMessage();return false;" id="delUser" style=" border: none; border-radius: 5px; padding: 10px; color: white; font-size: larger; width: 100%;">
+        Delete {{user}}
+    </button>
+</div>
+<div style="z-index: 1;height: 100vh; width: 100vw; display: none; justify-content: center; align-items: center;" id="confirmation">
+    <div style="height: 20vh; width: 25vw; display: grid; grid-template-rows: 1fr 0.5fr; background-color: rgb(26, 29, 56); padding: 1vw;">
+        <div style="color: white;">
+            <h3>Are you sure you want to delete {{user}}?</h3>
+            <p style="font-size: smaller; color: grey; font-weight: 200;">Caution: This action cannot be reversed. </p>
+        </div>
+        <div style="display: flex; justify-content: end; align-items: center;">
+            <a href="{% url 'deleteUser' user.id %}" onclick="return true;">
+                <button style="background-color: green;" class="btn">
+                    Confirm
+                </button>
+            </a>
+            <button style="background-color: red;" onclick="window.location.reload(); return false;" class="btn">
+                Cancel
+            </button>
+        </div>
+    </div>
+    <script src="{% static 'mobileRestricter.js' %}"></script>
+
+</div>
+<script>
+    function confirmMessage(){
+        document.getElementById('confirmation').style.display = 'flex';
+        document.getElementById('userUpdateForm').style.display = 'none';
+    }
+</script>

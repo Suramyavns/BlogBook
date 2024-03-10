@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write your blog!</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-dark-grey.css">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
+    <style>
+    #createBlog{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .createBlog{
+        width: 70vw;
+        height: 70vh;
+        border-radius: 5vh;
+        background-color: rgb(44, 44, 44);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2vh 2vw;
+    }
+    label{
+        display: none;
+    }
+    form{
+        height: 90%;
+        width: 90%;
+    }
+    .caption{
+        height: 8vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .caption>input{
+        padding: 10px 10px;
+        border-radius: 10px;
+        color: white;
+        width: 20vw;
+        font-size: large;
+    }
+    .body{
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    input,textarea{
+        border: 1px solid darkgrey;
+        color: white;
+        background: none;
+    }
+    .body>textarea{
+        height: 90%;
+        width: 90%;
+        border-radius: 20px;
+        padding: 20px;
+        font-size: large;
+    }
+    input::placeholder,textarea::placeholder{
+        color: grey;
+        text-align: center;
+    }
+    textarea::-webkit-input-placeholder{
+        font-style: italic;
+        vertical-align: middle;
+        line-height: 30px;
+    }
+    .submit-btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 8vh;
+    }
+    .submit-btn>input{
+        padding: 15px;
+        border-radius: 25px;
+        font-size: larger;
+        font-weight: normal;
+        padding: 10px 20px;
+        transform: ease 0.3s;
+    }
+    .submit-btn>input:hover{
+        background-color: white;
+        color: black;
+        transition: ease 0.3s;
+    }
+    </style>
+</head>
+<body id="createBlog" class="w3-theme-l5">
+    <h1
+    style="
+        position: relative;
+        top: -30px;
+        font-family: sans;
+    ">Write your blog here!</h1>
+    <div class="createBlog">
+        <a href="{% url 'home' %}" style="height: 0; z-index: 1; align-self: end; position: relative; right: 20px;">
+            <i class="fa-solid fa-house fa-2xl fa-white" style="position: relative; top: 30px; color: white;"></i>
+        </a>
+        <form method="post" action="{% url 'createBlog' %}">
+            {% csrf_token %}
+            <div class="caption">
+                {{form.caption}}
+            </div>
+            <div class="body">
+                {{form.body}}
+            </div>
+            <div class="submit-btn">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <br>
+    </div>
+    <script src="{% static 'mobileRestricter.js' %}"></script>
+
+</body>

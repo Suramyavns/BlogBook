@@ -1,0 +1,108 @@
+{% load widget_tweaks %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.name}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="{% static 'profile.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <style>
+        a{
+            color: black;
+        }
+        a:hover{
+            color: grey;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body style="background-color: #011100;">
+    <div class="row py-5 px-4">
+        <div class="col-md-5 mx-auto"> <!-- Profile widget -->
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 cover">
+                    <div style="width: 100%; justify-content: end; display: flex;">
+                        <a href="{% url 'home' %}" style="height: 0;">
+                            <i class="fa-solid fa-house fa-2xl fa-white" style="position: relative; top: 30px; color: white;"></i>
+                        </a>
+                    </div>
+                    <div class="media align-items-end profile-head"  style="font-family: sans-serif;">
+                        <div class="profile mr-3"><img
+                                src="{{ user.avatar.url}}"
+                                alt="..." width="130" class="rounded mb-2 img-thumbnail" >
+                                {% if followbtn is None %}
+                                <a href="{% url 'update' user.id %}"
+                                class="btn btn-outline-dark btn-sm btn-block">Edit profile</a>
+                                {% else %}
+                                    {% if not followbtn %}
+                                        <a href="{% url 'follow' user.id %}"
+                                        class="btn btn-outline-dark btn-sm btn-block">Follow</a>
+                                    {% else %}
+                                        <a href="{% url 'unfollow' user.id %}"
+                                        class="btn btn-outline-dark btn-sm btn-block">Unfollow</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0">
+                                {{user.name}}
+                            </h4>
+                            <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>{{user.city}},{{user.country}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light p-4 d-flex justify-content-end text-center" style="font-family: sans-serif;">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{blogs.count}}</h5><small class="text-muted"> <i
+                                    class="fas fa-image mr-1"></i>Blogs</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{numfollowers}}</h5><small class="text-muted"> <i
+                                    class="fas fa-user mr-1"></i>Followers</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{numfollowing}}</h5><small class="text-muted"> <i
+                                    class="fas fa-user mr-1"></i>Following</small>
+                        </li>
+                    </ul>
+                </div>
+                <div class="px-4 py-3">
+                    <h5 class="mb-0">About</h5>
+                    <div class="p-4 rounded shadow-sm bg-light" style="display: flex; flex-direction: column;">
+                        <p class="font-italic mb-0" style="font-size: 110%;">{{user.bio}}</p>
+                        <p class="w3-cursive w3-right-align" style="font-size: 80%;align-self: end; position: relative; top: 20px;">
+                            Came into existence {{user.birthday|timesince}} ago.
+                        </p>
+                    </div>
+                </div>
+                <div class="py-4 px-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <h5 class="mb-0">Blogs</h5>
+                    </div>
+                    <div class="row" style="justify-content: center;">
+                        {% for blog in blogs %}
+                        <div class="col-lg-11 mb-2 pr-lg-1" style="width: 100%; border: 1px solid grey; border-radius: 10px; padding: 20px;">
+                            <h3>{{blog.caption}}</h3>
+                            <p style="font-family: sans-serif;">{{blog.bodypart}}...<a href="{% url 'readBlog' blog.id %}">read more</a></p>
+                            <br>
+                            <p style="text-align: end; font-size: smaller; font-style: italic; position: relative; right: 10px;">Published {{blog.publish_date|timesince}} ago</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'mobileRestricter.js' %}"></script>
+</body>
+</html>

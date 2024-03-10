@@ -1,0 +1,77 @@
+{% load widget_tweaks %}
+{% load static %}
+<head>
+    <title>{{blog.caption}}</title>
+    <link rel="stylesheet" href="{% static 'readBlog.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}"
+        type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="navigation-bar">
+            <div class="navbar">
+                <div class="logo"><a
+                        href="{% url 'home' %}"><h1>Blogbook</h1></a></div>
+                <div></div>
+                <div class="search">
+                    <form action="{% url 'home' %}" method="get">
+                        <input type="text" name="Search" id="search"
+                            placeholder="Search...">
+                    </form>
+                </div>
+                <div class="user-profile">
+                    <a href="{% url  'profile' user.id %}">
+                        <img
+                            src="{{user.avatar.url}}"
+                            alt="user-pic">
+                    </a>
+                </div>
+                <div class="logout-btn">
+                    <a href="{% url 'Logout' %}">
+                        <button>Logout</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <main>
+            <div class="blog-window">
+                <div class="content-container">
+                    <div class="blog-content">
+                        <div class="blog-caption">
+                            {{blog.caption}}
+                        </div>
+                        <div class="blog-body">
+                            {{blog.body}}
+                        </div>
+                    </div>
+                    <div class="blog-actions">
+                        <a href="{% url 'blogAction' blog.id 1%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-up"><p>{{blog.upvotes}}</p></i></a>
+                        <a href="{% url 'blogAction' blog.id 0%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-down"><p>{{blog.downvotes}}</p></i></a>
+                        <a href="{% url 'createComment' blog.id %}"><i style="color: white;" class="fa fa-2xl fa-comment"><p>{{comments.count}}</p></i></a>
+                    </div>
+                </div>
+                <div class="blog-meta">
+                    Posted by <a href="{% url 'profile' blog.authorid.id %}">{{ blog.authorid }}</a>, {{blog.publish_date|timesince}} ago.
+                </div>
+            </div>
+            <div class="comment-section">
+                <div class="create-comment"></div>
+                <div class="comments"></div>
+            </div>
+        </main>
+        <footer>
+            <div>
+              <h4>All rights reserved by Suramya Didwania</h4>
+            </div>
+            <div>
+              <a href="#"><i class="fa-mail"></i></a>
+              <a href="#"><i class="fa-github"></i></a>
+              <a href="#"><i class="fa-linkedIN"></i></a>
+              <a href="#"><i class="fa-instagram"></i></a>
+            </div>
+          </footer>
+    </div>
+    <script src="{% static 'mobileRestricter.js' %}"></script>
+</body>

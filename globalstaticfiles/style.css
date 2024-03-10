@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+input{
+    outline: none;
+}
+
+footer{
+    position: fixed;
+    bottom: 0px;
+}

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form-container {
+    max-width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="date"],
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .form-group input[type="submit"],.form-group input[type="reset"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0px 10px;
+  }
+  
+  .form-group input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  #id_avatar{
+      margin-top: 5px;
+  }
+  #birthdayInput>input{
+      height: 100%;
+      width: 100%;
+  }
+      .btn{
+          margin: 0px 5px;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+          color: white;
+          font-weight: bold;
+          font-style: sans;
+          transition: ease 0.5s;
+      }
+      .btn:hover{
+          transition: ease 0.5s;
+          opacity: 0.7;
+          color: white;
+      }
