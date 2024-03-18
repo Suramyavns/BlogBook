@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #011100;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,10 +10,15 @@ body {
   }
   
   .form-container {
-    max-width: 600px;
-    background-color: #fff;
+    width: 30vw;
+    background-color: rgb(0, 24, 2);
+    color: #fb8b24;
     padding: 30px;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 1.1em;
     border-radius: 8px;
+    border: 1px solid black;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -37,8 +42,11 @@ body {
   .form-group textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+    color: aliceblue;
     box-sizing: border-box;
   }
   
@@ -48,7 +56,7 @@ body {
   }
   
   .form-group input[type="submit"],.form-group input[type="reset"] {
-    background-color: #4CAF50;
+    background-color: #004202;
     color: white;
     border: none;
     border-radius: 4px;
@@ -56,13 +64,40 @@ body {
     cursor: pointer;
     font-size: 16px;
     margin: 0px 10px;
+    transition: ease 0.5s;
   }
   
   .form-group input[type="submit"]:hover {
     background-color: #45a049;
+    transition: ease 0.5s;
+  }
+  .form-group input[type="reset"]{
+    transition: ease 0.5s;
+  }
+  .form-group input[type="reset"]:hover{
+    background-color: rgb(0, 0, 173) !important;
+    transition: ease 0.5s;
+  }
+  #delUser{
+    background-color: rgb(78, 0, 0) !important;
+    transition: ease 0.5s;
+  }
+  #delUser:hover{
+    background-color: rgb(182, 0, 0) !important;
+    transition: ease 0.5s;
   }
   #id_avatar{
       margin-top: 5px;
+  }
+  #birthdayInput>select{
+    background: transparent;
+    color: aliceblue;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 5px;
+  }
+  #birthdayInput>select>option{
+    background-color: rgb(3, 53, 23);
   }
   #birthdayInput>input{
       height: 100%;
