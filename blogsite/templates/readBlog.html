@@ -36,29 +36,131 @@
             </div>
         </div>
         <main>
+            <h1 style="color: #fb8b24; font-size: 2.5em; font-family: serif;">Blog</h1>
             <div class="blog-window">
                 <div class="content-container">
                     <div class="blog-content">
                         <div class="blog-caption">
                             {{blog.caption}}
                         </div>
-                        <div class="blog-body">
+                        <div class="blog-body" style="padding: 0px 30px;">
                             {{blog.body}}
                         </div>
                     </div>
                     <div class="blog-actions">
+                        <a href="{% url 'home' %}"><i style="color: #fb8b24;position: relative; top: -20px;" class="fa fa-2xl fa-house"></i></a>
                         <a href="{% url 'blogAction' blog.id 1%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-up"><p>{{blog.upvotes}}</p></i></a>
                         <a href="{% url 'blogAction' blog.id 0%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-down"><p>{{blog.downvotes}}</p></i></a>
                         <a href="{% url 'createComment' blog.id %}"><i style="color: white;" class="fa fa-2xl fa-comment"><p>{{comments.count}}</p></i></a>
+                        {% if blog.authorid.id is request.user.id %}
+                        <a href="{% url 'deleteBlog' blog.id %}"><i class="fa fa-2xl fa-trash" style="color: red;"></i></a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="blog-meta">
                     Posted by <a href="{% url 'profile' blog.authorid.id %}">{{ blog.authorid }}</a>, {{blog.publish_date|timesince}} ago.
                 </div>
             </div>
+            <div class="create-comment">
+                {% if toupdatecomment is None %}
+                <form action="{% url 'createComment' blog.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="comment-form">
+                        {{commentform.body}}
+                    </div>
+                    <div class="post-btn">
+                        <input type="submit" value="Post">
+                    </div>
+                </form>
+                {% else %}
+                <form action="{% url 'updateComment' toupdatecomment %}" method="post">
+                    {% csrf_token %}
+                    <div class="comment-form">
+                        {{updatecommentform.body}}
+                    </div>
+                    <div class="post-btn">
+                        <input type="submit" value="Post">
+                    </div>
+                </form>
+                {% endif %}
+            </div>
             <div class="comment-section">
-                <div class="create-comment"></div>
-                <div class="comments"></div>
+                <h1 style="color: #fb8b24; font-family: serif; font-size: 2.5em;">Comments</h1>
+                {% for comment in comments %}
+                <div class="single-comment">
+                    <div class="content">
+                        <div class="comment-body">
+                            <p class="body-para">{{comment.body}}</p>
+                        </div>
+                        <div class="comment-actions">
+                            <a href="{% url 'commentAction' comment.id 1%}"><i style="color: white;" class="fa fa-large fa-thumbs-up"><p>{{comment.upvotes}}</p></i></a>
+                            <a href="{% url 'commentAction' comment.id 0%}"><i style="color: white;" class="fa fa-large fa-thumbs-down"><p>{{comment.downvotes}}</p></i></a>
+                            <a href="{% url 'createReply' comment.id %}"><i style="color: white;" class="fa fa-large fa-reply"></i></a>
+                            {% if comment.authorid.id is request.user.id %}
+                            <a href="{% url 'updateComment' comment.id %}"><i style="color: white;" class="fa fa-large fa-pen-to-square"></i></a>
+                            <a href="{% url 'deleteComment' comment.id %}"><i class="fa fa-large fa-trash" style="color: red;"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="comment-meta">
+                        {% if not replies is None %}
+                        <a href="{% url 'readBlog' blog.id %}">Hide replies</a>
+                        {% else %}
+                        <a href="{% url 'readReplies' comment.id %}">Read replies</a>
+                        {% endif %}
+                        <p>Posted by <a href="{% url 'profile' comment.authorid.id %}">{{comment.authorid}}</a> {{comment.publish_date|timesince}} ago.</p>
+                    </div>
+                    {% if not replyForm is None and toreplyoncomment is comment.id %}
+                        <form action="{% url 'createReply' comment.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="comment-form">
+                                {{replyForm.body}}
+                            </div>
+                            <div class="post-btn">
+                                <input type="submit" value="Post">
+                            </div>
+                        </form>
+                    {% endif %}
+                    <div class="replies">
+                        {% if not replies is None and showrepliesoncomment is comment.id %}
+                        <h3 style="color: white; font-size: 1.5em; text-align: left; width: 100%;">{{replies.count}} replies...</h3>
+                        {% for reply in replies %}
+                        <div class="reply single-comment">
+                            <div class="reply content">
+                                <div class="comment-body">
+                                    {% if not updatereplyform is None and reply.id is toupdatereply %}
+                                    <form action="{% url 'updateReply' reply.id %}" method="post" style="width: 100%;">
+                                        {% csrf_token %}
+                                        <div class="comment-form">
+                                            {{updatereplyform.body}}
+                                        </div>
+                                        <div class="post-btn">
+                                            <input type="submit" value="Post">
+                                        </div>
+                                    </form>
+                                    {% else %}
+                                    <p class="body-para">{{reply.body}}</p>
+                                    {% endif %}
+                                </div>
+                                <div class="comment-actions">
+                                    <a href="{% url 'replyAction' reply.id 1%}"><i style="color: white;" class="fa fa-large fa-thumbs-up"><p>{{reply.upvotes}}</p></i></a>
+                                    <a href="{% url 'replyAction' reply.id 0%}"><i style="color: white;" class="fa fa-large fa-thumbs-down"><p>{{reply.downvotes}}</p></i></a>
+                                    {% if reply.authorid.id is request.user.id %}
+                                    <a href="{% url 'updateReply' reply.id %}"><i style="color: white;" class="fa fa-large fa-pen-to-square"></i></a>
+                                    <a href="{% url 'deleteReply' reply.id %}"><i class="fa fa-large fa-trash" style="color: red;"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="reply comment-meta">
+                                <p>Posted by <a href="{% url 'profile' reply.authorid.id %}">{{reply.authorid}}</a> {{reply.publish_date|timesince}} ago.</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             </div>
         </main>
         <footer>
@@ -66,10 +168,10 @@
               <h4>All rights reserved by Suramya Didwania</h4>
             </div>
             <div>
-              <a href="#"><i class="fa-mail"></i></a>
-              <a href="#"><i class="fa-github"></i></a>
-              <a href="#"><i class="fa-linkedIN"></i></a>
-              <a href="#"><i class="fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-mail"></i></a>
+              <a href="#"><i class="fa-brands fa-github"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedIN"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
             </div>
           </footer>
     </div>

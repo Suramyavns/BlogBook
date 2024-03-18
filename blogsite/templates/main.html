@@ -65,7 +65,7 @@
                 <div class="blog-title"><h2>{{blog.caption}}</h2></div>
                 <div class="blog-meta"> Posted {{blog.publish_date|timesince}} ago | {{blog.authorid}}</div>
                 <div class="blog-body">
-                  {{blog.bodypart}}...<a href="{% url 'readBlog' blog.id %}">Read more</a>
+                  {{blog.bodypart}}...<a href="{% url 'readBlog' blog.id %}" style="text-decoration: none; color: rgb(151, 71, 243);">Read more</a>
                 </div>
               </div>
             </div>

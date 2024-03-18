@@ -183,7 +183,7 @@ def createReply(request,id):
             reply.comment = thiscomment
             reply.save()
             return HttpResponseRedirect(f'/readBlog/{thiscomment.blog.id}')
-    return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':replyForm,'toreplyoncomment':thiscomment.id})
+    return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':replyForm,'toreplyoncomment':thiscomment.id,'showrepliesoncomment':thiscomment.id})
 
 
 def readReplies(request,id):
@@ -195,7 +195,7 @@ def readReplies(request,id):
         showBtns=True
     thisblogcomments = comments.objects.filter(blog=thisBlog)
     form = writeCommentForm(instance=thiscomment)
-    return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'toreplyoncomment':thiscomment.id,'showrepliesoncomment':thiscomment.id})
+    return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':None,'showrepliesoncomment':thiscomment.id})
 
 def updateReply(request,id):
     reply = replies.objects.get(id=id)

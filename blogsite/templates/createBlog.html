@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Write your blog!</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-dark-grey.css">
     <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
     <style>
     #createBlog{
@@ -14,13 +13,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: #011100;
     }
 
     .createBlog{
         width: 70vw;
         height: 70vh;
         border-radius: 5vh;
-        background-color: rgb(44, 44, 44);
+        background-color: rgb(15, 15, 15);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -54,7 +54,7 @@
         align-items: center;
     }
     input,textarea{
-        border: 1px solid darkgrey;
+        border: 1px solid #fb8b24;
         color: white;
         background: none;
     }
@@ -95,16 +95,18 @@
     }
     </style>
 </head>
-<body id="createBlog" class="w3-theme-l5">
+<body id="createBlog">
     <h1
     style="
+        color: #fb8b24;
         position: relative;
         top: -30px;
-        font-family: sans;
+        font-family: serif;
+        font-size: 3em;
     ">Write your blog here!</h1>
     <div class="createBlog">
         <a href="{% url 'home' %}" style="height: 0; z-index: 1; align-self: end; position: relative; right: 20px;">
-            <i class="fa-solid fa-house fa-2xl fa-white" style="position: relative; top: 30px; color: white;"></i>
+            <i class="fa-solid fa-house fa-2xl" style="position: relative; top: 30px; color: #fb8b24;"></i>
         </a>
         <form method="post" action="{% url 'createBlog' %}">
             {% csrf_token %}
