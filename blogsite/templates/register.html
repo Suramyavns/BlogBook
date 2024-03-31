@@ -30,9 +30,11 @@
         <div class="form-block-2 w-form">
             <h1 class="heading">Sign up</h1>
             <form id="email-form" name="email-form" data-name="Email Form"
-                method="get" class="form-2"
+                method="post" class="form-2"
                 data-wf-page-id="65c37d730aa49648c7c5f63f"
-                data-wf-element-id="255ac9bf-4f7e-5178-c60f-fc9ba4a7221d"><label
+                data-wf-element-id="255ac9bf-4f7e-5178-c60f-fc9ba4a7221d">
+                {% csrf_token %}
+                <label
                     for="name" class="email">Email</label>
                     {{form.username}}
                     <label
