@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title>Register</title>
         <link rel="stylesheet" href="{% static 'login.css' %}">
         <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
         <link
@@ -29,7 +29,7 @@
     <body class="body">
         <div class="form-block-2 w-form">
             <h1 class="heading">Sign up</h1>
-            <form id="email-form" name="email-form" data-name="Email Form"
+            <form action="{% url 'registration' %}" id="email-form" name="email-form" data-name="Email Form"
                 method="post" class="form-2"
                 data-wf-page-id="65c37d730aa49648c7c5f63f"
                 data-wf-element-id="255ac9bf-4f7e-5178-c60f-fc9ba4a7221d">

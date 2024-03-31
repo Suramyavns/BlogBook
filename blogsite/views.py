@@ -34,13 +34,20 @@ def loginUser(request):
     return render(request,'login.html',{'form':CustomAuthenticationForm})
 
 def registerUser(request):
-    if request.method == 'POST':
+    if(request.method == 'POST'):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email
+            user = form.save()
+            user.refresh_from_db()  
+            # load the profile instance created by the signal
             user.save()
-            login(request,user)
+            raw_password = form.cleaned_data.get('password1')
+
+            # login user after signing up
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+
+            # redirect user to home page
             return redirect('home')
     return render(request,'register.html',{'form':CustomUserCreationForm})
 

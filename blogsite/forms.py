@@ -27,7 +27,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("email",)
+        fields = ("email",'password1','password2')
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'text-input-box'}))
     password = forms.CharField(widget=forms.PasswordInput())
 
