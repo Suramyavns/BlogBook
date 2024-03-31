@@ -10,4 +10,4 @@ Run with gunicorn:
 ```
 python3 -m gunicorn blogbook.wsgi
 ```
-Go to ```http://localhost:8080```
+Go to ```http://localhost:8000```
