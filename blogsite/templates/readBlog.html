@@ -51,7 +51,7 @@
                         <a href="{% url 'home' %}"><i style="color: #fb8b24;position: relative; top: -20px;" class="fa fa-2xl fa-house"></i></a>
                         <a href="{% url 'blogAction' blog.id 1%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-up"><p>{{blog.upvotes}}</p></i></a>
                         <a href="{% url 'blogAction' blog.id 0%}"><i style="color: white;" class="fa fa-2xl fa-thumbs-down"><p>{{blog.downvotes}}</p></i></a>
-                        <a href="{% url 'createComment' blog.id %}"><i style="color: white;" class="fa fa-2xl fa-comment"><p>{{comments.count}}</p></i></a>
+                        <a href=""><i style="color: white;" class="fa fa-2xl fa-comment"><p>{{comments.count}}</p></i></a>
                         {% if blog.authorid.id is request.user.id %}
                         <a href="{% url 'deleteBlog' blog.id %}"><i class="fa fa-2xl fa-trash" style="color: red;"></i></a>
                         {% endif %}

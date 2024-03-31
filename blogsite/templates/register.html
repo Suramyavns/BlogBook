@@ -36,13 +36,13 @@
                 {% csrf_token %}
                 <label
                     for="name" class="email">Email</label>
-                    {{form.username}}
+                    {{form.email}}
                     <label
                     for="email" class="password">Password</label>
-                    {{form.password}}
+                    {{form.password1}}
                     <label
                     for="email" class="password">Confirm Password</label>
-                    {{form.password}}
+                    {{form.password2}}
                     <input type="submit" data-wait="Please wait..."
                     class="submit-button w-button" value="Submit">
                 <div class="text-block-2">Already have an

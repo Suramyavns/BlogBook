@@ -37,17 +37,10 @@ def registerUser(request):
     if(request.method == 'POST'):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  
-            # load the profile instance created by the signal
+            user = form.save(commit=False)
+            user.username = request.POST.get('email')
             user.save()
-            raw_password = form.cleaned_data.get('password1')
-
-            # login user after signing up
-            user = authenticate(username=user.username, password=raw_password)
-            login(request, user)
-
-            # redirect user to home page
+            login(request=request,user=user)
             return redirect('home')
     return render(request,'register.html',{'form':CustomUserCreationForm})
 

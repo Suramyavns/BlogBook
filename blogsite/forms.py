@@ -24,13 +24,9 @@ class createBlogForm(forms.ModelForm):
     caption = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'placeholder':"Give your blog a caption!"}))
     body = forms.CharField(widget=forms.Textarea(attrs={'placeholder':f'{quote}'}))
 class CustomUserCreationForm(UserCreationForm):
-
     class Meta:
         model = User
         fields = ("email",'password1','password2')
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'text-input-box'}))
-    password = forms.CharField(widget=forms.PasswordInput())
-
 class updateBlogForm(forms.ModelForm):
     class Meta:
         model = blog
@@ -55,5 +51,4 @@ class CustomUserChangeForm(UserChangeForm):
 class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = User
-    username = forms.CharField(widget=forms.TextInput(attrs={'class':'text-input-box'}))
-    password = forms.CharField(widget=forms.PasswordInput())
+        fields = ('email','password')

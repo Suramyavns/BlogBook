@@ -232,7 +232,7 @@
   margin-bottom: 122px;
 }
 
-input[type='text'],input[type='password']{
+input[type='text'],input[type='password'],input[type='email']{
   width: 90%;
   border: none;
   border-bottom: 1px solid #bf0603;
