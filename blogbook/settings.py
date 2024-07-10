@@ -32,9 +32,9 @@ load_dotenv(env_path)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3!5^=39zp04#wt(ukc+n@n)5)e33(w68@8w%m7zotg8q*do-sh')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
