@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm,CustomAuthenticationForm,CustomUserChangeForm,createBlogForm,updateBlogForm,writeCommentForm,writeReplyForm
 from .models import User,blog,comments,replies,follower
 from django.db.models import Q
+from django.utils import timezone
 # Create your views here.
 @login_required(login_url='/loginUser')
 def index(request):        
@@ -19,7 +20,7 @@ def index(request):
     context = {
         'user':request.user,
         'blogs':blogs,
-        'num_blogs':blogs.count
+        'num_blogs':blogs.count,
     }
     return render(request,'main.html',context)
 

@@ -32,7 +32,7 @@ class User(AbstractUser):
 class blog(models.Model):
     caption = models.CharField(max_length=50,blank=False)
     body = models.TextField(blank=False)
-    publish_date = models.DateField(blank=False,default=timezone.now())
+    publish_date = models.DateTimeField(blank=False,auto_now_add=True)
     authorid = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
@@ -43,7 +43,7 @@ class blog(models.Model):
 
 class comments(models.Model):
     body = models.TextField(blank=False)
-    publish_date = models.DateField(blank=False,default=timezone.now())
+    publish_date = models.DateTimeField(blank=False,auto_now_add=True)
     authorid = models.ForeignKey(User,on_delete=models.SET_NULL,blank=False,null=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
@@ -51,7 +51,7 @@ class comments(models.Model):
 
 class replies(models.Model):
     body = models.TextField(blank=False)
-    publish_date = models.DateField(blank=False,default=timezone.now())
+    publish_date = models.DateTimeField(blank=False,auto_now_add=True)
     authorid = models.ForeignKey(User,on_delete=models.SET_NULL,blank=False,null=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)

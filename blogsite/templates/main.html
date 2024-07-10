@@ -2,30 +2,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlogSite</title>
-    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}">
-    <link rel="stylesheet" href="{% static 'main.css' %}">
-    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'fontawesomefree/css/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'favicon.png' %}"
+      type="image/x-icon"
+    />
   </head>
   <body class="body">
     <div class="container">
       <div class="navigation-bar">
         <div class="navbar">
-          <div class="logo"><a href="{% url 'home' %}"><h1>Blogbook</h1></a></div>
+          <div class="logo">
+            <a href="{% url 'home' %}"><h1>Blogbook</h1></a>
+          </div>
           <div></div>
           <div class="search">
             <form action="{% url 'home' %}" method="get">
-              <input type="text" name="Search" id="search"
-                placeholder="Search...">
+              <input
+                type="text"
+                name="Search"
+                id="search"
+                placeholder="Search..."
+              />
             </form>
           </div>
           <div class="user-profile">
             <a href="{% url  'profile' user.id %}">
-              <img
-                src="{{user.avatar.url}}"
-                alt="user-pic">
+              <img src="{{user.avatar.url}}" alt="user-pic" />
             </a>
           </div>
           <div class="logout-btn">
@@ -40,14 +48,12 @@
           <div class="profile-card">
             <div class="card">
               <div class="profile-pic">
-                <img
-                  src="{{user.avatar.url}}"
-                  alt="profile-pic">
+                <img src="{{user.avatar.url}}" alt="profile-pic" />
               </div>
               <div class="username">{{user.uname}}</div>
-              <hr>
+              <hr />
               <div class="user-bio">{{user.bio}}</div>
-              <hr>
+              <hr />
             </div>
             <div class="write-blog">
               <a href="{% url 'createBlog' %}">Write a blog!</a>
@@ -57,15 +63,19 @@
             {% for blog in blogs %}
             <div class="blog">
               <div class="thumbnail">
-                <img
-                  src="{{blog.thumbnail.url}}"
-                  alt="thumbnail">
+                <img src="{{blog.thumbnail.url}}" alt="thumbnail" />
               </div>
               <div class="blog-data">
                 <div class="blog-title"><h2>{{blog.caption}}</h2></div>
-                <div class="blog-meta"> Posted {{blog.publish_date|timesince}} ago | {{blog.authorid}}</div>
+                <div class="blog-meta">
+                  Posted {{blog.publish_date|timesince}} ago | {{blog.authorid}}
+                </div>
                 <div class="blog-body">
-                  {{blog.bodypart}}...<a href="{% url 'readBlog' blog.id %}" style="text-decoration: none; color: rgb(151, 71, 243);">Read more</a>
+                  {{blog.bodypart}}...<a
+                    href="{% url 'readBlog' blog.id %}"
+                    style="text-decoration: none; color: rgb(151, 71, 243)"
+                    >Read more</a
+                  >
                 </div>
               </div>
             </div>
@@ -78,9 +88,15 @@
           <h4>All rights reserved by Suramya Didwania</h4>
         </div>
         <div class="dev-social">
-          <a href="https://www.linkedin.com/in/suramya-didwania-12a6b61ba/"><i class="fa-brands fa-linkedin fa-lg" style="color: #ffffff;"></i></a>
-          <a href="https://www.github.com/suramyavns"><i class="fa-brands fa-github fa-lg" style="color: #ffffff;"></i></a>
-          <a href="https://www.instagram.com/suramya.did"><i class="fa-brands fa-instagram fa-lg" style="color: #ffffff;"></i></a>
+          <a href="https://www.linkedin.com/in/suramya-didwania-12a6b61ba/"
+            ><i class="fa-brands fa-linkedin fa-lg" style="color: #ffffff"></i
+          ></a>
+          <a href="https://www.github.com/suramyavns"
+            ><i class="fa-brands fa-github fa-lg" style="color: #ffffff"></i
+          ></a>
+          <a href="https://www.instagram.com/suramya.did"
+            ><i class="fa-brands fa-instagram fa-lg" style="color: #ffffff"></i
+          ></a>
         </div>
       </footer>
     </div>
