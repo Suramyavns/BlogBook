@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3!5^=39zp04#wt
 #DEBUG = True
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
