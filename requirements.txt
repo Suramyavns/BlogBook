@@ -2,10 +2,12 @@ asgiref==3.8.1
 Django==5.0.7
 django-clearcache==1.2.1
 django-cors-headers==4.4.0
+django-environ==0.11.2
 django-widget-tweaks==1.5.0
 fontawesome==5.10.1.post1
 fontawesomefree==6.5.1
 gunicorn==22.0.0
+mysqlclient==2.2.4
 packaging==24.1
 pillow==10.4.0
 python-dotenv==1.0.1
