@@ -98,6 +98,7 @@ def createBlog(request):
         if form.is_valid():
             blog = form.save(commit=False)
             blog.authorid = request.user
+            blog.publish_date = timezone.now()
             blog.save()
             return redirect('home')
     return render(request,"createBlog.html",{'form':createBlogForm})
@@ -147,6 +148,7 @@ def createComment(request,blogid):
             comment = form.save(commit=False)
             comment.authorid = request.user
             comment.blog = thisblog
+            comment.publish_date = timezone.now()
             comment.save()
             return HttpResponseRedirect(f'/readBlog/{blogid}')
         
@@ -201,6 +203,7 @@ def createReply(request,id):
             reply = newform.save(commit=False)
             reply.authorid = request.user
             reply.comment = thiscomment
+            reply.publish_date = timezone.now()
             reply.save()
             return HttpResponseRedirect(f'/readBlog/{thiscomment.blog.id}')
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':replyForm,'toreplyoncomment':thiscomment.id,'showrepliesoncomment':thiscomment.id})

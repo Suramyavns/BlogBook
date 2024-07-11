@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3!5^=39zp04#wt
 #DEBUG = True
 DEBUG = True
 
-ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app']
+ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app','127.0.0.1']
 # Application definition
 CSRF_TRUSTED_ORIGINS = ['https://blogbook-production-f94c.up.railway.app']
 #CORS_ALLOW_CREDENTIALS = True
@@ -131,11 +131,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 AUTH_USER_MODEL = "blogsite.User"
 
