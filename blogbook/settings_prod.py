@@ -37,21 +37,21 @@ DEBUG = True
 ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app']
 # Application definition
 CSRF_TRUSTED_ORIGINS = ['https://blogbook-production-f94c.up.railway.app']
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-CORS_ALLOW_CREDENTIALS = True
-
-CORS_REPLACE_HTTPS_REFERER = True
-
-CSRF_COOKIE_DOMAIN = 'railway.app'
-
-CORS_ORIGIN_WHITELIST = (
-    'https://blogbook-production-f94c.up.railway.app',
-    'up.railway.app',
-    'railway.app',
-)
+#CORS_ALLOW_CREDENTIALS = True
+#
+#CORS_ORIGIN_ALLOW_ALL = True
+#
+#CORS_ALLOW_CREDENTIALS = True
+#
+#CORS_REPLACE_HTTPS_REFERER = True
+#
+#CSRF_COOKIE_DOMAIN = 'railway.app'
+#
+#CORS_ORIGIN_WHITELIST = (
+#    'https://blogbook-production-f94c.up.railway.app',
+#    'up.railway.app',
+#    'railway.app',
+#)
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
