@@ -34,9 +34,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3!5^=39zp04#wt
 #DEBUG = True
 DEBUG = True
 
-ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app','127.0.0.1']
+ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app','127.0.0.1','blogbook-testing.up.railway.app']
 # Application definition
-CSRF_TRUSTED_ORIGINS = ['https://blogbook-production-f94c.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://blogbook-production-f94c.up.railway.app','https://blogbook-testing.up.railway.app']
 #CORS_ALLOW_CREDENTIALS = True
 #
 #CORS_ORIGIN_ALLOW_ALL = True
