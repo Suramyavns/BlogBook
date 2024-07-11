@@ -6,8 +6,11 @@ from .forms import CustomUserCreationForm,CustomAuthenticationForm,CustomUserCha
 from .models import User,blog,comments,replies,follower
 from django.db.models import Q
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_protect
+
 # Create your views here.
 @login_required(login_url='/loginUser')
+@csrf_protect
 def index(request):        
     if request.GET.get('Search')!=None:
         filter = request.GET.get('Search')
@@ -24,6 +27,7 @@ def index(request):
     }
     return render(request,'main.html',context)
 
+@csrf_protect
 def loginUser(request):
     if(request.method=='POST'):
         email = request.POST.get('username')
@@ -34,6 +38,7 @@ def loginUser(request):
             return redirect('home')
     return render(request,'login.html',{'form':CustomAuthenticationForm})
 
+@csrf_protect
 def registerUser(request):
     if(request.method == 'POST'):
         form = CustomUserCreationForm(request.POST)
@@ -45,12 +50,14 @@ def registerUser(request):
             return redirect('home')
     return render(request,'register.html',{'form':CustomUserCreationForm})
 
+@csrf_protect
 def logoutUser(request):
     user = request.user
     if user.is_authenticated:
         logout(request)
     return redirect('home')
 
+@csrf_protect
 def showprofile(request,id):
     user = User.objects.get(id=id)
     blogs = blog.objects.filter(authorid=user)
@@ -67,6 +74,7 @@ def showprofile(request,id):
         return render(request,'profile.html',{'user':user,'blogs':blogs,'numfollowers':numFollower,'numfollowing':numFollowing})
     return render(request,'profile.html',{'user':user,'followbtn':followingStatus,'blogs':blogs,'numfollowers':numFollower,'numfollowing':numFollowing})
 
+@csrf_protect
 def updateprofile(request,id):
     user = User.objects.get(id=id)
     if request.method == 'POST':
@@ -77,11 +85,13 @@ def updateprofile(request,id):
     form = CustomUserChangeForm(instance=user)
     return render(request,'updateprofile.html',{'user':user,'form':form})
 
+@csrf_protect
 def deleteUser(request,id):
     user = User.objects.get(id=id)
     user.delete()
     return redirect('home')
 
+@csrf_protect
 def createBlog(request):
     if(request.method=='POST'):
         form = createBlogForm(request.POST)
@@ -92,6 +102,7 @@ def createBlog(request):
             return redirect('home')
     return render(request,"createBlog.html",{'form':createBlogForm})
 
+@csrf_protect
 def readBlog(request,id):
     thisBlog = blog.objects.get(id=id)
     showBtns = False
@@ -100,6 +111,7 @@ def readBlog(request,id):
         showBtns=True
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'toupdatecomment':None})
 
+@csrf_protect
 def updateBlog(request,id):
     thisBlog = blog.objects.get(id=id)
     form = updateBlogForm(instance=thisBlog)
@@ -110,11 +122,13 @@ def updateBlog(request,id):
             return HttpResponseRedirect(f'/readBlog/{id}')
     return render(request,"updateBlog.html",{'form':form,'blog':thisBlog})
 
+@csrf_protect
 def deleteBlog(request,id):
     thisBlog = blog.objects.get(id=id)
     thisBlog.delete()
     return redirect('home')
 
+@csrf_protect
 def blogAction(request,id,preference):
     thisBlog = blog.objects.get(id=id)
     if(preference==1):
@@ -124,6 +138,7 @@ def blogAction(request,id,preference):
     thisBlog.save()
     return HttpResponseRedirect(f'/readBlog/{id}')
 
+@csrf_protect
 def createComment(request,blogid):
     if request.method=='POST':
         form = writeCommentForm(request.POST)
@@ -135,6 +150,7 @@ def createComment(request,blogid):
             comment.save()
             return HttpResponseRedirect(f'/readBlog/{blogid}')
         
+@csrf_protect
 def updateComment(request,id):
     thecomment = comments.objects.get(id=id)
     thisBlog = thecomment.blog
@@ -150,12 +166,14 @@ def updateComment(request,id):
             return HttpResponseRedirect(f'/readBlog/{thisBlog.id}')
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':id})
 
+@csrf_protect
 def deleteComment(request,id):
     thiscomment = comments.objects.get(id=id)
     thisBlog = thiscomment.blog
     thiscomment.delete()
     return HttpResponseRedirect(f'/readBlog/{thisBlog.id}')
 
+@csrf_protect
 def commentAction(request,id,preference):
     thiscomment = comments.objects.get(id=id)
     if preference==1:
@@ -166,6 +184,7 @@ def commentAction(request,id,preference):
     return HttpResponseRedirect(f'/readBlog/{thiscomment.blog.id}')
 
 
+@csrf_protect
 def createReply(request,id):
     replyForm = writeReplyForm()
     thiscomment = comments.objects.get(id=id)
@@ -187,6 +206,7 @@ def createReply(request,id):
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':replyForm,'toreplyoncomment':thiscomment.id,'showrepliesoncomment':thiscomment.id})
 
 
+@csrf_protect
 def readReplies(request,id):
     thiscomment = comments.objects.get(id=id)
     replys = replies.objects.all().filter(comment=thiscomment)
@@ -198,6 +218,7 @@ def readReplies(request,id):
     form = writeCommentForm(instance=thiscomment)
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':form,'toupdatecomment':None,'replies':replys,'replyForm':None,'showrepliesoncomment':thiscomment.id})
 
+@csrf_protect
 def updateReply(request,id):
     reply = replies.objects.get(id=id)
     updatereplyform = writeReplyForm(instance=reply)
@@ -216,6 +237,7 @@ def updateReply(request,id):
     return render(request,'readBlog.html',{'blog':thisBlog,'user':thisBlog.authorid,'showbtns':showBtns,'comments':thisblogcomments,'commentform':writeCommentForm,'updatecommentform':writeCommentForm(instance=reply.comment),'toupdatecomment':None,'replies':replys,'toreplyoncomment':thiscomment.id,'showrepliesoncomment':thiscomment.id,'updatereplyform':updatereplyform,'toupdatereply':id})
 
 
+@csrf_protect
 def deleteReply(request,id):
     thisreply = replies.objects.get(id=id)
     thiscomment = thisreply.comment
@@ -223,6 +245,7 @@ def deleteReply(request,id):
     return HttpResponseRedirect(f'/readReplies/{thiscomment.id}')
 
 
+@csrf_protect
 def replyAction(request,id,preference):
     reply = replies.objects.get(id=id)
     if preference==1:
@@ -232,6 +255,7 @@ def replyAction(request,id,preference):
     reply.save()
     return HttpResponseRedirect(f"/readReplies/{reply.comment.id}")
 
+@csrf_protect
 def follow(request,id):
     user_to_follow = User.objects.get(id=id)
     user_following = request.user
@@ -239,6 +263,7 @@ def follow(request,id):
     fwr.save()
     return HttpResponseRedirect(f'/profile/{id}')
 
+@csrf_protect
 def unfollow(request,id):
     user_unfollowing = follower.objects.filter(
         Q(user=User.objects.get(id=id)) & Q(follower=request.user)
