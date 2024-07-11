@@ -14,8 +14,7 @@ from pathlib import Path
 # Support env variables from .env file if defined
 import os
 from dotenv import load_dotenv
-
-
+import environ
 
 
 
@@ -23,35 +22,20 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 load_dotenv(env_path)
-
+env = environ.Env()
+environ.Env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'django-insecure-3!5^=39zp04#wt(ukc+n@n)5)e33(w68@8w%m7zotg8q*do-sh'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-3!5^=39zp04#wt(ukc+n@n)5)e33(w68@8w%m7zotg8q*do-sh')
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 DEBUG = True
 
-ALLOWED_HOSTS = ['blogbook-production-f94c.up.railway.app','127.0.0.1','blogbook-testing.up.railway.app']
+ALLOWED_HOSTS = []
 # Application definition
-CSRF_TRUSTED_ORIGINS = ['https://blogbook-production-f94c.up.railway.app','https://blogbook-testing.up.railway.app']
-#CORS_ALLOW_CREDENTIALS = True
-#
-#CORS_ORIGIN_ALLOW_ALL = True
-#
-#CORS_ALLOW_CREDENTIALS = True
-#
-#CORS_REPLACE_HTTPS_REFERER = True
-#
-#CSRF_COOKIE_DOMAIN = 'railway.app'
-#
-#CORS_ORIGIN_WHITELIST = (
-#    'https://blogbook-production-f94c.up.railway.app',
-#    'up.railway.app',
-#    'railway.app',
-#)
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +47,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'clearcache',
     'fontawesomefree',
-    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -95,16 +78,19 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'blogbook.wsgi.application'
+#WSGI_APPLICATION = 'blogbook.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DBNAME'),
+        'USER': env('DBUSER'),
+        'PASSWORD': env('DBPASS'),
+        'HOST':env('DBHOST'),
+        'PORT':env('DBPORT'),
     }
 }
 # Password validation
@@ -131,11 +117,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 AUTH_USER_MODEL = "blogsite.User"
 
@@ -149,8 +135,6 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
