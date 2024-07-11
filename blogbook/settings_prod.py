@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'clearcache',
     'fontawesomefree',
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'blogbook.wsgi.application'
+WSGI_APPLICATION = 'blogbook.wsgi.application'
 
 
 # Database
@@ -133,6 +134,8 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
