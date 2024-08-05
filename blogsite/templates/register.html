@@ -59,6 +59,14 @@
             crossorigin="anonymous"></script>
         <script src="{% static 'login.js' %}" type="text/javascript"></script>
         <script src="{% static 'mobileRestricter.js' %}"></script>
-
+        <script>
+            {% if not form.errors is None %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        alert("{{error}}")
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </script>
     </body>
 </html>

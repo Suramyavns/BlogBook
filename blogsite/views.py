@@ -48,6 +48,7 @@ def registerUser(request):
             user.save()
             login(request=request,user=user)
             return redirect('home')
+        return render(request,'register.html',{'form':form})
     return render(request,'register.html',{'form':CustomUserCreationForm})
 
 @csrf_protect

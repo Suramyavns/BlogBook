@@ -1,4 +1,6 @@
 /env
-/blogsite/migrations
-/venv
+blogsite/migrations
+venv/
 .env
+blogbook/__pycache__/
+blogsite/__pycache__/
