@@ -6,7 +6,7 @@
 
 ### To run a development server:
 
-`bash updateModel.sh
-    python manage.py runserver`
+`bash updateModel.sh &&
+python manage.py runserver`
 
 #### Happy Blogging!
