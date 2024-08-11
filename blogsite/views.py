@@ -36,6 +36,7 @@ def loginUser(request):
         if user is not None:
             login(request,user)
             return redirect('home')
+        return render(request,'login.html',{'form':CustomAuthenticationForm,'errors':['Invalid Credentials!']})
     return render(request,'login.html',{'form':CustomAuthenticationForm})
 
 @csrf_protect
