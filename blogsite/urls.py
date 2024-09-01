@@ -29,4 +29,4 @@ urlpatterns = [
     path('replyAction/<int:id>/<int:preference>',views.replyAction,name='replyAction'),
     path('follow/<int:id>',views.follow,name='follow'),
     path('unfollow/<int:id>',views.unfollow,name='unfollow'),
-] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()

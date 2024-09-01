@@ -205,7 +205,9 @@ body::-webkit-scrollbar{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    height: fit-content;
+    padding: 1rem;
+    position: relative;
 }
 .thumbnail>img{
     height: 180px;

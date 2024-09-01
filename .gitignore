@@ -2,5 +2,6 @@
 blogsite/migrations
 venv/
 .env
+.venv/
 blogbook/__pycache__/
 blogsite/__pycache__/
